@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Coore Co — modern platforms, parts, and finishing. Built with tight specs and real QC." />
+  <meta property="og:title" content="Coore Co" />
+  <meta property="og:description" content="Built to run. Clean finishes. Real support." />
+  <meta property="og:type" content="website" />
+  <title>Coore Co</title>
+
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1621; --text:#e7edf6; --muted:#a7b3c7;
+      --line:rgba(231,237,246,.12); --brand:#e2b857; --brand2:#7dd3fc;
+      --shadow:0 12px 40px rgba(0,0,0,.45); --radius:18px; --max:1120px;
+      --focus:0 0 0 3px rgba(226,184,87,.35);
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:60;background:rgba(10,14,20,.85);
+      border-bottom:1px solid var(--line);backdrop-filter:blur(10px)
+    }
+    .topbar__inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:16px}
+    .topbar__link{color:var(--brand);font-weight:750}
+    .header{
+      position:sticky;top:44px;z-index:50;background:rgba(11,15,20,.78);
+      border-bottom:1px solid var(--line);backdrop-filter:blur(10px)
+    }
+    .header__inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand__logo{
+      width:34px;height:34px;border-radius:10px;border:1px solid var(--line);
+      display:grid;place-items:center;font-weight:900;letter-spacing:.08em;
+      background:linear-gradient(180deg, rgba(226,184,87,.22), rgba(226,184,87,.06));
+      color:rgba(231,237,246,.95)
+    }
+    .brand__name{letter-spacing:.18em;font-weight:900;font-size:14px;opacity:.95}
+    .nav{display:flex;align-items:center;gap:18px}
+    .nav a{color:var(--muted);font-weight:700;font-size:14px}
+    .nav a:hover{color:var(--text)}
+    .nav-toggle{
+      display:none;width:44px;height:40px;background:transparent;border:1px solid var(--line);
+      border-radius:12px;align-items:center;justify-content:center;gap:5px
+    }
+    .nav-toggle span{display:block;width:18px;height:2px;background:var(--text);opacity:.9;border-radius:2px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:14px;
+      border:1px solid rgba(226,184,87,.35);
+      background:linear-gradient(180deg, rgba(226,184,87,.20), rgba(226,184,87,.10));
+      color:var(--text);font-weight:800;box-shadow:0 10px 30px rgba(226,184,87,.10)
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:focus{outline:none;box-shadow:var(--focus)}
+    .btn--ghost{border:1px solid var(--line);background:rgba(255,255,255,.02);box-shadow:none}
+    .btn--sm{padding:10px 12px;border-radius:12px;font-size:14px}
+    .link{color:var(--brand2);font-weight:700}
+    .link:hover{text-decoration:underline}
+    .badge{
+      display:inline-flex;padding:6px 10px;border-radius:999px;border:1px solid rgba(125,211,252,.28);
+      background:rgba(125,211,252,.08);font-weight:800;letter-spacing:.14em;font-size:12px
+    }
+    .hero{
+      padding:56px 0 28px;border-bottom:1px solid var(--line);
+      background:
+        radial-gradient(900px 480px at 20% 10%, rgba(226,184,87,.18), transparent 60%),
+        radial-gradient(700px 440px at 80% 0%, rgba(125,211,252,.14), transparent 55%);
+    }
+    .hero__inner{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+    h1{margin:14px 0 10px;font-size:clamp(34px,4.2vw,54px);line-height:1.04;letter-spacing:-.02em}
+    .subhead{color:var(--muted);font-size:16px;line-height:1.65;max-width:56ch}
+    .hero__cta{display:flex;gap:12px;margin:18px 0 12px;flex-wrap:wrap}
+    .hero__stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+    .stat{border:1px solid var(--line);background:rgba(255,255,255,.02);border-radius:var(--radius);padding:12px}
+    .stat__num{display:block;font-weight:900}
+    .stat__label{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+    .hero__media{position:relative}
+    .hero__image{
+      height:380px;border-radius:22px;border:1px solid var(--line);box-shadow:var(--shadow);
+      background:
+        radial-gradient(650px 260px at 30% 30%, rgba(226,184,87,.22), transparent 60%),
+        radial-gradient(600px 240px at 70% 50%, rgba(125,211,252,.16), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    }
+    .hero__glow{position:absolute;inset:-30px;background:radial-gradient(closest-side, rgba(226,184,87,.16), transparent 60%);filter:blur(18px);z-index:-1}
+    .section{padding:54px 0}
+    .section--alt{background:linear-gradient(180deg, transparent, rgba(255,255,255,.02), transparent);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .section__head{margin-bottom:18px}
+    h2{margin:0 0 8px;font-size:28px;letter-spacing:-.01em}
+    .section__head p{margin:0;color:var(--muted);line-height:1.6}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border-radius:var(--radius);padding:18px;box-shadow:0 10px 28px rgba(0,0,0,.22)
+    }
+    .card h3{margin:0 0 10px}
+    .card p{margin:0 0 12px;color:var(--muted);line-height:1.6}
+    .list{margin:0;padding-left:18px}
+    .list li{margin:6px 0;color:rgba(231,237,246,.88)}
+    .card__actions{margin-top:12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .note{margin-top:16px;border:1px dashed rgba(231,237,246,.18);background:rgba(255,255,255,.02);padding:14px 16px;border-radius:var(--radius);color:rgba(231,237,246,.90)}
+    .why{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .why__item{padding:18px;border-radius:var(--radius);border:1px solid var(--line);background:rgba(15,22,33,.55)}
+    .why__item h3{margin:0 0 10px}
+    .why__item p{margin:0;color:var(--muted);line-height:1.6}
+    details{border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.02);padding:14px 16px}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:900}
+    details p{color:var(--muted);line-height:1.6;margin:10px 0 0}
+    .contact{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;align-items:start}
+    .panel{border:1px solid var(--line);background:rgba(255,255,255,.02);border-radius:var(--radius);padding:16px}
+    .panel p{margin:0 0 14px;color:var(--muted);line-height:1.6}
+    .form{border:1px solid var(--line);background:rgba(255,255,255,.02);border-radius:var(--radius);padding:16px}
+    .form__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    label{display:flex;flex-direction:column;gap:8px;font-weight:700;color:rgba(231,237,246,.92)}
+    input,select,textarea{
+      width:100%;padding:12px;border-radius:14px;border:1px solid rgba(231,237,246,.14);
+      background:rgba(11,15,20,.65);color:var(--text);outline:none
+    }
+    input:focus,select:focus,textarea:focus{box-shadow:var(--focus);border-color:rgba(226,184,87,.35)}
+    .form__full{grid-column:1/-1}
+    .form__actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+    .form__hint{margin:0;color:var(--muted);font-size:13px}
+    .footer{padding:26px 0 40px;color:rgba(231,237,246,.85)}
+    .footer__inner{border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .small{font-size:13px;color:var(--muted)}
+    @media (max-width:980px){
+      .hero__inner{grid-template-columns:1fr}
+      .hero__image{height:320px}
+      .cards{grid-template-columns:1fr}
+      .why{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+    }
+    @media (max-width:760px){
+      .nav-toggle{display:inline-flex}
+      .nav{
+        position:absolute;right:20px;top:60px;width:min(360px,calc(100vw - 40px));
+        display:none;flex-direction:column;align-items:stretch;gap:10px;padding:12px;
+        border:1px solid var(--line);background:rgba(11,15,20,.92);border-radius:18px;box-shadow:var(--shadow)
+      }
+      .nav a{padding:10px 12px;border-radius:12px}
+      .nav a:hover{background:rgba(255,255,255,.03)}
+      .nav.is-open{display:flex}
+      .form__grid{grid-template-columns:1fr}
+      .hero__stats{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar" role="note">
+    <div class="container topbar__inner">
+      <span>Coore Co — Florida-based manufacturing & finishing</span>
+      <a class="topbar__link" href="#contact">Get a quote</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="Coore Co home">
+        <div class="brand__logo" aria-hidden="true">CC</div>
+        <span class="brand__name">COORE CO</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="#platforms">Platforms</a>
+        <a href="#services">Services</a>
+        <a href="#why">Why Coore</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn--sm" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__inner">
+        <div>
+          <p class="badge">BUILT TO RUN</p>
+          <h1>Reliable builds.<br/>Clean finishes.<br/>No fluff.</h1>
+          <p class="subhead">
+            Coore Co delivers modern platforms, parts, and precision finishing.
+            Built with tight specs, real QC, and support that answers.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn" href="#platforms">See platforms</a>
+            <a class="btn btn--ghost" href="#services">Finishing services</a>
+          </div>
+
+          <div class="hero__stats" aria-label="Highlights">
+            <div class="stat">
+              <span class="stat__num">5.56 / .223</span>
+              <span class="stat__label">Multi-cal options</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">QC-first</span>
+              <span class="stat__label">Documented checks</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">Dealer-ready</span>
+              <span class="stat__label">Spec sheets on request</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__media" aria-hidden="true">
+          <div class="hero__image"></div>
+          <div class="hero__glow"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platforms" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Platforms</h2>
+          <p>Standardized, dependable builds — configurable for your store, team, or personal setup.</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3>Flagship 14.5–16"</h3>
+            <p>Balanced do-it-all setup with consistent assembly and practical component choices.</p>
+            <ul class="list">
+              <li>Reliable configuration options</li>
+              <li>Multi-cal 5.56 / .223</li>
+              <li>Dealer line sheet available</li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--sm" href="#contact" data-prefill="Inquiry: Flagship 14.5–16&quot;">Request pricing</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Compact 11.5–12.5"</h3>
+            <p>Short configuration options focused on controllability and dependable setup.</p>
+            <ul class="list">
+              <li>Setup options available</li>
+              <li>Build documentation</li>
+              <li>Dealer packages available</li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--sm" href="#contact" data-prefill="Inquiry: Compact 11.5–12.5&quot;">Request pricing</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Parts & Finishing</h3>
+            <p>Curated components and finishing services to keep results consistent and professional.</p>
+            <ul class="list">
+              <li>Cerakote finishing</li>
+              <li>Laser engraving</li>
+              <li>Batch work available</li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--sm" href="#contact" data-prefill="Inquiry: Parts & finishing">Get a quote</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="note">
+          <strong>Compliance note:</strong> We follow all federal and state laws. Sales of serialized items are handled per applicable requirements and shipped only where permitted.
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section section--alt">
+      <div class="container">
+        <div class="section__head">
+          <h2>Services</h2>
+          <p>Precision finishing and build services with a clean, repeatable process.</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3>Cerakote Finishing</h3>
+            <p>Single color, two-tone, and patterns available with a documented prep & cure process.</p>
+            <ul class="list">
+              <li>Prep, mask, spray, cure</li>
+              <li>Color matching available</li>
+              <li>Quote by parts list</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Laser Engraving</h3>
+            <p>Clean branding, markings, and custom designs for components.</p>
+            <ul class="list">
+              <li>Logo placement guidance</li>
+              <li>Light or deep passes</li>
+              <li>Batch work available</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Assembly & QC</h3>
+            <p>Consistent assembly with function checks and documentation where applicable.</p>
+            <ul class="list">
+              <li>Fit validation</li>
+              <li>Function checks</li>
+              <li>Dealer-ready packaging options</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Why Coore Co</h2>
+          <p>Simple: consistent results, clean documentation, and support you can reach.</p>
+        </div>
+
+        <div class="grid why">
+          <div class="why__item">
+            <h3>QC-first</h3>
+            <p>Repeatable process with checks that protect reliability and consistency.</p>
+          </div>
+          <div class="why__item">
+            <h3>Dealer-friendly</h3>
+            <p>Bulk pricing, line sheets, and consistent configurations built for shelf confidence.</p>
+          </div>
+          <div class="why__item">
+            <h3>Clean branding</h3>
+            <p>Modern aesthetic and professional finishing. Your brand or ours — done right.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section--alt">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p>Quick answers. Dealers can request a line sheet.</p>
+        </div>
+
+        <details open>
+          <summary>Do you sell to dealers?</summary>
+          <p>Yes. Send your FFL details and what you want to stock. We’ll respond with availability, pricing tiers, and lead times.</p>
+        </details>
+
+        <details>
+          <summary>Do you ship nationwide?</summary>
+          <p>We ship where legally permitted. Serialized items are handled per applicable requirements.</p>
+        </details>
+
+        <details>
+          <summary>Can I request a custom finish?</summary>
+          <p>Yes. Send your parts list, desired colors, and any logo/marking files. We’ll quote and confirm details before work begins.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Contact</h2>
+          <p>Tell us what you need. We’ll get back with next steps and a quote.</p>
+        </div>
+
+        <div class="contact">
+          <form class="form" id="contactForm">
+            <div class="form__grid">
+              <label>
+                Name
+                <input name="name" type="text" autocomplete="name" required />
+              </label>
+
+              <label>
+                Email
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+
+              <label>
+                Phone (optional)
+                <input name="phone" type="tel" autocomplete="tel" />
+              </label>
+
+              <label>
+                I’m a…
+                <select name="type">
+                  <option value="customer">Customer</option>
+                  <option value="dealer">Dealer / Store</option>
+                  <option value="range">Range / Training</option>
+                  <option value="other">Other</option>
+                </select>
+              </label>
+
+              <label class="form__full">
+                What are you looking for?
+                <textarea name="message" rows="6" required placeholder="Example: Dealer pricing, line sheet request, Cerakote quote, engraving, etc."></textarea>
+              </label>
+            </div>
+
+            <div class="form__actions">
+              <button class="btn" type="submit">Send message</button>
+              <p class="form__hint">This opens your email app (free, no backend).</p>
+            </div>
+          </form>
+
+          <aside class="panel">
+            <h3 style="margin:0 0 8px;">Business</h3>
+            <p><strong>Coore Co</strong><br/>Florida, USA</p>
+
+            <h3 style="margin:0 0 8px;">Links</h3>
+            <p>
+              <a class="link" href="#" target="_blank" rel="noopener">Instagram</a><br/>
+              <a class="link" href="#" target="_blank" rel="noopener">YouTube</a>
+            </p>
+
+            <p class="small">
+              Want privacy/terms pages later? We can add them when you move off the single-file setup.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> Coore Co. All rights reserved.</p>
+      <p class="small">Built to run. Built to last.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Update year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const toggle = document.getElementById("navToggle");
+    const nav = document.getElementById("nav");
+    if (toggle && nav) {
+      toggle.addEventListener("click", () => {
+        const open = nav.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      nav.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          nav.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    // Prefill buttons
+    document.querySelectorAll("[data-prefill]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const msg = document.querySelector('textarea[name="message"]');
+        if (msg && !msg.value.trim()) msg.value = btn.getAttribute("data-prefill") + "\\n\\n";
+      });
+    });
+
+    // Contact form opens email app (free)
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+
+      // CHANGE THIS to your real email:
+      const to = "sales@yourdomain.com";
+
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const phone = String(data.get("phone") || "").trim();
+      const type = String(data.get("type") || "").trim();
+      const message = String(data.get("message") || "").trim();
+
+      const subject = encodeURIComponent(`Coore Co Inquiry — ${type}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\\nEmail: ${email}` +
+        (phone ? `\\nPhone: ${phone}` : "") +
+        `\\nType: ${type}\\n\\n${message}`
+      );
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
